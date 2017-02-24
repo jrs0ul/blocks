@@ -119,37 +119,14 @@ public:
     unsigned globalKEY;
     
     
-    Button boatNo_button;
-    Button boatYes_button;
-    Button boatExit_button;
-
-    Button catExit_button;
-    Button catGive_button;
-
-    Button busExit_button;
-    Button busGo_button;
-
-    Button lake_LRBar;
     
-    Button lake_DepthBar;
-    Button BucketWindow;
     Button jrs0ul_button;
-    Button Depth_OK;
-    Button BucketWindow_OK;
-    Button Bait_CfgWindow;
-    Button Bait_Area;
-    Button Bait_OK;
     Button Play_Button;
     Button Credits_Button;
     Button Help_Button;
     Button Options_Button;
     Button QuitButton;
-    Button resetSaveGame_button;
-    Button linetension_button;
     Button optionsOK_button;
-    Button Shop_GoodsArea;
-    Button Rest_FishArea;
-    Button BusTicketArea;
     YesNoDialog yesno;
     Button more_button;
     Button prevHelpPage_button;
@@ -216,10 +193,10 @@ public:
     
                 
                 more_button(10, SCREEN_HEIGHT-64, 100, 64),
-                prevHelpPage_button(5, 270, 48, 48),
-                nextHelpPage_button(427, 270, 48, 48),
+                prevHelpPage_button(10, SCREEN_HEIGHT - 60, 48, 48),
+                nextHelpPage_button(SCREEN_WIDTH-10-48, SCREEN_HEIGHT - 60, 48, 48),
                 helpBack_button(25, 15, 60, 30, COLOR(0.7f, 0.7f, 1.0f)),
-                NoMusic_Button(SCREEN_WIDTH - 50, 2, 48, 50, COLOR(1,1,1,0.6f))
+                NoMusic_Button(SCREEN_WIDTH/2 - 50, 2, 48, 50, COLOR(1,1,1,0.6f))
                 
                       
     {
@@ -238,6 +215,8 @@ public:
 
                 clickCount = 0; GameState = MENU; 
                 Ftim = 0;
+
+                maxHelpPage = 2;
                     
                     
         

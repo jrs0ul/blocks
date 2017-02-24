@@ -25,7 +25,7 @@ bool Shape::overlaps(GameBoard& b, int shiftX, int shiftY){
 //------------------------
 void Shape::moveDown(GameBoard& b){
     timer++;
-    if (timer == lag){
+    if (timer >= lag){
         timer = 0;
     
         if ((y + height < 22)&&(!overlaps(b, 0, 1))){
@@ -33,7 +33,7 @@ void Shape::moveDown(GameBoard& b){
         }
         else{
             deathTimer++;
-            if (deathTimer == lag/2){
+            if (deathTimer >= lag/3){
                 stay(b);
                 dead = true;
             }

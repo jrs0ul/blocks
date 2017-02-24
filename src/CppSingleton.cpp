@@ -27,10 +27,10 @@ void Singleton::draw_intro(){
 //------------------------------------
 void Singleton::drawOptions(){
     draw_intro();
-    int x = SCREEN_WIDTH/2 - 180;
+    int x = SCREEN_WIDTH/2 - 100;
     int y = 25;
     int width = 280;
-    int height = 360;
+    int height = 460;
     COLOR c1 = COLOR(0.5f,0.0f,0.8f, 0.9f);
     COLOR c2 = COLOR(0.2f,0.0f,0.3f, 0.7f);
     pics.draw(-1, x, y, 0, false, width, height, 0, 
@@ -42,9 +42,7 @@ void Singleton::drawOptions(){
               32/64.0f, height/128.0f, 0, c1, c2);
     
     pics.draw(18, SCREEN_WIDTH/2, 32, 3, true);
-    resetSaveGame_button.drawTextnPicture(pics, 7, 2, 0, "Reset");
     optionsOK_button.drawTextnPicture(pics, 7, 2, 0, "OK");
-    linetension_button.draw(pics, 2, (!linetension_button.state) ? 10 : 11);
     WriteShadedText(130, 110, pics, 0, "Music volume:");
     
     musicVolumeBar.draw(pics, 2, 8, 9);
@@ -71,11 +69,6 @@ void Singleton::optionsLogic(){
         int my = touches.up[0].v[1];
         
         
-        if (linetension_button.isPointerOnTop(mx, my)){
-            linetension_button.state = (!linetension_button.state)?1:0;
-            sys.useLineTension = linetension_button.state;//)?0:1;
-        }
-        
         if (musicVolumeBar.isPointerOnNextpage(mx, my)){
             musicVolumeBar.pageDown();
             sys.musicVolume = musicVolumeBar.state()/100.0f; 
@@ -89,21 +82,7 @@ void Singleton::optionsLogic(){
             //ss.playsound(8);
         }
         
-        if (yesno.active()){
-            
-            if (yesno.isPointerOnYes(mx, my)){
-            }
-            if (yesno.isPointerOnNo(mx, my)){
-                yesno.deactivate();
-            }
-            return;
-        }
-        
-        if (resetSaveGame_button.isPointerOnTop(mx, my)){
-            yesno.activate();
-            
-        }
-        
+               
         if (optionsOK_button.isPointerOnTop(mx, my)){
             GameState = MENU;
             char buf[255];
@@ -163,7 +142,7 @@ void Singleton::init(){
     
     
     
-    musicVolumeBar.set(80, 130, 2, 100, sys.musicVolume*100, 2);
+    musicVolumeBar.set(50, 130, 2, 100, sys.musicVolume*10, 2);
     
     ss.init(0);
     ss.loadFiles("data/sfx/", "audio.txt");
@@ -301,10 +280,10 @@ void Singleton::Credits(){
 //-----------------------------
 void Singleton::DrawHelp(){
     draw_intro();
-    int x = SCREEN_WIDTH/2 - 200;
+    int x = SCREEN_WIDTH/2 - 120;
     int y = 5;
-    int width = 400;
-    int height = 310;
+    int width = 240;
+    int height = 460;
     COLOR c1 = COLOR(0.5f,0.0f,0.8f, 0.9f);
     COLOR c2 = COLOR(0.2f,0.0f,0.3f, 0.7f);
     pics.draw(-1, x, y, 0, false, width, height, 0, 
@@ -316,82 +295,35 @@ void Singleton::DrawHelp(){
               32/64.0f, height/128.0f, 0, c1, c2);
     pics.draw(18, SCREEN_WIDTH/2, 32, 2, true);
     
-    char pages[4][11][255] = {{"Game consists of three modes: the town, the lake map,",
-                              "and the fishing spot.",
-                              " ",
-                              "                       -Town-",
-                              "Here you can find all shops. The bait shop is in the",
-                              "left middle of the screen.",
-                              "On the middle right you can sell your catch.",
-                              "On far right is the lake. It's your main direction",
-                              "to start fishing.",
-                              "On the far left is your home. If you go there,",
-                              "you'll be returned to main menu."
+    char pages[4][11][255] = {{" ",
+                              " "
                               },
                             {" ",
-                             "                      -Lake Map-",
-                             "You should pick a place for a fishing or return back ",
-                             "to town.",
-                             "Every spot is somewhat unique."},
+                             " "},
                             {},
                             {" ",
-                             "                       -Fish- ",
-                             "Roaches and zanders, perches and ruffes, and also",
-                             "breams like worms.",
-                             "Pikes, perches, and zanders will grab spinner and",
-                             "twister lures.",
-                             "Roaches, breams, and ruffes love paste and maggots.",
+                             " ",
                             }};
     
     switch (activeHelpPage){
         case 0:{
             for (unsigned i = 0; i < 11; i++)
-                WriteShadedText(SCREEN_WIDTH/2 - 220, 50+i*20, pics, 0, pages[0][i], 0.95f);
+                WriteShadedText(x, 50+i*20, pics, 0, pages[0][i], 0.95f);
             
         } break;
         case 1:{
             for (unsigned i = 0; i < 11; i++)
-                WriteShadedText(SCREEN_WIDTH/2 - 220, 50+i*20, pics, 0, pages[1][i], 0.95f);
+                WriteShadedText(x, 50+i*20, pics, 0, pages[1][i], 0.95f);
         }break;
         
         case 2:{
-            
-            WriteShadedText(SCREEN_WIDTH/2 - 41, 50, pics, 0, "-Lake-");
-            WriteShadedText(SCREEN_WIDTH/2 - 220, 80, pics, 0, "It's the place where you catch fish.", 0.95f);
-            WriteShadedText(SCREEN_WIDTH/2 - 220, 100, pics, 0, "There are some buttons on the screen:", 0.95f);
-            pics.draw(2, 20, 115, 3, false, 0.5f, 0.5f);
-            WriteShadedText(42, 125, pics, 0, "/", 0.9f);
-            pics.draw(2, 50, 115, 4, false, 0.5f, 0.5f);
-            WriteShadedText(90, 120, pics, 0, "- Throw/Pull", 0.9f);
-            pics.draw(2, 220, 115, 1, false, 0.5f, 0.5f);
-            WriteShadedText(245, 120, pics, 0, "- Shows your catch", 0.95f);
-            pics.draw(2, 20, 140, 2, false, 0.5f, 0.5f);
-            WriteShadedText(40, 145, pics, 0, " - Goes to town", 0.95f);
-    
-            
-            WriteShadedText(40, 166, pics, 0, " - Depth (", 0.95f);
-            WriteShadedText(130, 166, pics, 0, "   Surface    Middle    Bottom )", 0.8f);
-            
-            pics.draw(2, 20, 190, 0, false, 0.5f, 0.5f, 0, COLOR(0.5,0.5,0.5), COLOR(0.5,0.5,0.5));
-            pics.draw(3, 20, 190, 0, false, 0.5f, 0.5f, 0);
-            WriteShadedText(40, 195, pics, 0, " - Bait", 0.95f);
-    
-            WriteShadedText(SCREEN_WIDTH/2 - 215, 220, pics, 0, "If the bait button is exactly like this", 0.95f); 
-            WriteShadedText(SCREEN_WIDTH/2 - 215, 240, pics, 0, "you'll need to set your bait. To do so, tap this", 0.95f); 
-            WriteShadedText(SCREEN_WIDTH/2 - 215, 260, pics, 0, "button and select a bait you want", 0.95f);
-           
-    
+              
         }break;
             
-        case 3:{
-            for (unsigned i = 0; i < 11; i++)
-                WriteShadedText(SCREEN_WIDTH/2 - 220, 50+i*20, pics, 0, pages[3][i], 0.95f);
-           
-        }
     }
     char buf[255];
     sprintf(buf, "%u/%u", activeHelpPage+1, maxHelpPage+1);
-    WriteShadedText(220, 290, pics, 0, buf);
+    WriteShadedText(SCREEN_WIDTH/2 - 50, SCREEN_HEIGHT - 50, pics, 0, buf);
     
     if (activeHelpPage == maxHelpPage)
         nextHelpPage_button.c = COLOR(0.5f, 0.5f, 0.5f);
@@ -515,6 +447,9 @@ void Singleton::GameLogic(){
             shape->moveLeft(gameBoard);
         if (Keys[3])
             shape->moveRight(gameBoard);
+        if (Keys[1]){
+            shape->speedUp();
+        }
         shape->moveDown(gameBoard);
         if (shape->dead){
             delete shape;

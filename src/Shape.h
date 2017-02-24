@@ -4,6 +4,9 @@
 #include "TextureLoader.h"
 
 
+#define MAXTICKS 20
+
+
 class Shape{
 
     unsigned char data[16];
@@ -26,6 +29,7 @@ public:
     void stay(GameBoard& b);
     void draw(unsigned int px, unsigned int py, PicsContainer& pics);
     void rotate(GameBoard& b);
+    void speedUp(){timer = lag;}
 
     Shape(const Shape& s){
         //printf("copying shape\n");
@@ -36,7 +40,7 @@ public:
         y = 0;
         dead = false;
         timer = 0;
-        lag = 10;
+        lag = MAXTICKS;
         deathTimer = 0;
     }
 //-------------
@@ -88,7 +92,7 @@ public:
 
 
         }
-        lag = 10;
+        lag = MAXTICKS;
         x = 5;
         y = 0;
         dead = false;
