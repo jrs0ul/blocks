@@ -439,13 +439,31 @@ void Singleton::GameLogic(){
 
 
     if (shape){
+
+        if (Keys[2])
+            keyLeftTime++;
+       
+        if (Keys[3])
+            keyRightTime++;
+       
+
+        //printf("keyLeftTime:%d\n", keyLeftTime);
+
+        if ((OldKeys[2])&&(!Keys[2]))
+            keyLeftTime = 0;
+        if ((OldKeys[3])&&(!Keys[3]))
+            keyRightTime = 0;
+
         //printf("Shape control...\n");
 
         if ((Keys[0])&&(!OldKeys[0]))
             shape->rotate(gameBoard);
-        if (Keys[2])
+
+        if ((OldKeys[2] && (!Keys[2]) && (!keyLeftTime))||(Keys[2] && (keyLeftTime > 10))){
             shape->moveLeft(gameBoard);
-        if (Keys[3])
+            //keyLeftTime = 0;
+        }
+        if ((OldKeys[3] && (!Keys[3]) && (!keyRightTime))||(Keys[3] && (keyRightTime > 10)))
             shape->moveRight(gameBoard);
         if (Keys[1]){
             shape->speedUp();
@@ -459,6 +477,9 @@ void Singleton::GameLogic(){
             for (int i = 0; i < ln; i++)
                 ss.playsound(0); 
         }
+
+
+
     }
     else {
         if (newShape){

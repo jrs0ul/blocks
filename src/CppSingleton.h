@@ -90,7 +90,8 @@ public:
     
     PicsContainer pics;
     
-    
+    int keyLeftTime;
+    int keyRightTime;
     
     int Ftim;
     
@@ -217,7 +218,8 @@ public:
                 Ftim = 0;
 
                 maxHelpPage = 2;
-                    
+                keyLeftTime = 0;
+                keyRightTime = 0;
                     
         
                 //---
