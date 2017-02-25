@@ -33,7 +33,7 @@ void Shape::moveDown(GameBoard& b){
         }
         else{
             deathTimer++;
-            if (deathTimer >= lag/3){
+            if (deathTimer >= 2){
                 stay(b);
                 dead = true;
             }

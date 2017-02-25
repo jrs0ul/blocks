@@ -92,6 +92,7 @@ public:
     
     int keyLeftTime;
     int keyRightTime;
+    bool downReleased;
     
     int Ftim;
     
@@ -99,8 +100,6 @@ public:
     bool ExitDialog_Active;
     
     
-    float Alpha1;
-    float Alpha2;
     
     TFont Font;
 
@@ -108,8 +107,7 @@ public:
     
     
     
-    int MouseXOld, MouseYOld, MouseX, MouseY, MouseButton, MouseButtonOld,
-    fishx,fishy;
+    int MouseXOld, MouseYOld, MouseX, MouseY, MouseButton, MouseButtonOld;
     
     
     Vector3D oldMoveTouch;
@@ -160,7 +158,6 @@ public:
     
     int loadingAnim;
 
-    unsigned ticketIndex;
 
     bool Works;
 
@@ -220,6 +217,7 @@ public:
                 maxHelpPage = 2;
                 keyLeftTime = 0;
                 keyRightTime = 0;
+                downReleased = true;
                     
         
                 //---

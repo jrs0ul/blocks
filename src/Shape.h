@@ -7,6 +7,25 @@
 #define MAXTICKS 20
 #define MAXSHAPES 7
 
+const unsigned char shapeData[7][16] = {{1, 1, 0, 0,
+                                         1, 1},
+
+                                        {0, 1, 0, 0,
+                                         1, 1, 1, 0},
+
+                                        {0, 1, 1, 0,
+                                         1, 1, 0, 0},
+
+                                        {1, 1, 0, 0,
+                                         0, 1, 1, 0},
+
+                                        {1, 1, 1, 0,
+                                         0, 0, 1, 0},
+
+                                        {1, 1, 1, 0,
+                                         1, 0, 0, 0},
+                                        
+                                        {1, 1, 1, 1}};
 
 class Shape{
 
@@ -56,34 +75,27 @@ public:
 
         switch(t){
             case 0:{
-                data[0] =  1;  data[1] = 1;
-                data[4] =  1;  data[5] = 1;
-
+                memcpy(data, shapeData[0], 16);
                 width = 2;
                 height = 2;
                 c = COLOR(0, 0, 1);
             }break;
             case 1:{
-                data[0] =  0;  data[1] = 1; data[2] =  0;
-                data[4] =  1;  data[5] = 1; data[6] =  1;
-
+                memcpy(data, shapeData[1], 16);
                 width = 3;
                 height = 2;
                 c = COLOR(1, 1, 0);
             }break;
 
              case 2:{
-                data[0] =  0;  data[1] = 1; data[2] =  1;
-                data[4] =  1;  data[5] = 1; data[6] =  0;
-
+                memcpy(data, shapeData[2], 16);
                 width = 3;
                 height = 2;
                 c = COLOR(1, 0, 0.5f);
 
             }break;
             case 3:{
-                data[0] =  1;  data[1] = 1; data[2] =  0;
-                data[4] =  0;  data[5] = 1; data[6] =  1;
+                memcpy(data, shapeData[3], 16);
 
                 width = 3;
                 height = 2;
@@ -92,8 +104,7 @@ public:
             }break;
 
             case 4:{
-                data[0] =  1;  data[1] = 1; data[2] =  1;
-                data[4] =  0;  data[5] = 0; data[6] =  1;
+                memcpy(data, shapeData[4], 16);
 
                 width = 3;
                 height = 2;
@@ -101,27 +112,18 @@ public:
             }break;
 
             case 5:{
-                data[0] =  1;  data[1] = 1; data[2] =  1;
-                data[4] =  1;  data[5] = 0; data[6] =  0;
-
+                memcpy(data, shapeData[5], 16);
                 width = 3;
                 height = 2;
                 c = COLOR(1, 0.5f, 0);
             }break;
 
             case 6:{
-                data[0] =  1;  data[1] = 1; data[2] =  1; data[3] = 1;
-
+                memcpy(data, shapeData[6], 16);
                 width = 4;
                 height = 1;
                 c = COLOR(1, 0, 0);
             }break;
-
-
-                      
-
-
-
 
         }
         lag = MAXTICKS;

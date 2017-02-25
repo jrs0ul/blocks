@@ -453,6 +453,10 @@ void Singleton::GameLogic(){
             keyLeftTime = 0;
         if ((OldKeys[3])&&(!Keys[3]))
             keyRightTime = 0;
+        if (!downReleased){
+            if ((OldKeys[1])&&(!Keys[1]))
+                downReleased = true;
+        }
 
         //printf("Shape control...\n");
 
@@ -465,11 +469,13 @@ void Singleton::GameLogic(){
         }
         if ((OldKeys[3] && (!Keys[3]) && (!keyRightTime))||(Keys[3] && (keyRightTime > 5)))
             shape->moveRight(gameBoard);
-        if (Keys[1]){
+        if ((Keys[1]) && (downReleased)){
             shape->speedUp();
         }
         shape->moveDown(gameBoard);
+
         if (shape->dead){
+            downReleased = false;
             delete shape;
             shape = 0;
             int ln = gameBoard.findLines();
