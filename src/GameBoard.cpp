@@ -14,7 +14,7 @@ void GameBoard::draw(PicsContainer& pics){
     for (unsigned i = 0; i < 20; i++){
         for (unsigned a = 0; a < 10; a++){
             if (board[i + 2][a])
-                pics.draw(1, 16 + a * 16, 16 + i*16, 1, false, 1.0f, 1.0f, 0.0f, COLOR(1,0,0), COLOR(1,0,0));
+                pics.draw(1, 16 + a * 16, 16 + i*16, 1, false, 1.0f, 1.0f, 0.0f, COLOR(1,1,1), COLOR(1,1,1));
         }
     }
 
